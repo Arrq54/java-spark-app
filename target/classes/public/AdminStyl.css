@@ -1,0 +1,324 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+html {
+    height: 100%;
+}
+body{
+    min-height: 100% !important;
+    background-color: #f4f4fb;
+}
+.menu{
+    background-color: #4547B5;
+    display: flex;
+    padding: 25px;
+    justify-content: center;
+}
+.menuitem{
+    margin: 0 50px;
+    display: flex;
+    transition: 0.3s all ease;
+    cursor: pointer;
+}
+.menuitem>a {
+    background: 
+      linear-gradient(to right, #4547B5, #4547B5),
+      linear-gradient(90deg, white 0%, white 70%, #4547B5 100%);
+    background-size: 100% 0.1em, 0 0.1em;
+    background-position: 100% 100%, 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 300ms;
+  }
+
+  .menuitem>a:hover,
+  .menuitem>a:focus {
+  background-size: 0 0.1em, 100% 0.1em;
+}
+
+svg{
+    height: 25px;
+    width: 25px;
+    margin-right: 3px;
+    transform: translateY(-5px);
+    fill: white;
+    transition: 0.2s all ease;
+}
+.menuitem>a{
+    color: white;
+    text-decoration: none;
+}
+.menuitem:hover>svg {
+    transition: 0.2s all ease;
+    transform: translateY(-18px); 
+}
+
+.main{
+    display: flex;
+    min-height: 100vh
+}
+.left{
+    width: 25%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.btn{
+    outline: 0;
+    border: 2px solid #4547B5;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 4px;
+    font-size: 13px;
+    height: 30px;
+    margin-top: 15px;
+    background-color: #4547B5;
+    color: white;
+    padding: 0 20px;
+    transition: 0.3s all ease;
+}
+.btn:hover {
+    background-color: #ffffff;
+    transition: 0.3s all ease;
+    color: #4547B5;
+    transform: translateY(-3px);
+}
+tr{
+    height: 50px;
+}
+tr:nth-of-type(1)>th:first-of-type{
+    border-radius:  10px 0 0 5px;
+}
+tr:nth-of-type(1)>th:last-of-type{
+    border-radius:  0 10px 5px 0;
+}
+th{
+    color: gray;
+    min-width: 80px;
+    text-align: center;
+    border: none;
+    background-color: #f4f4fb;
+}
+.tablediv{
+    padding: 5px;
+    background-color: white;
+    height: fit-content;
+    margin-top: 30px;
+    border-radius: 10px;
+}
+table{
+    border-spacing: 0;
+}
+td{
+    text-align: center;
+    transition: 0.1s all ease;
+    position: relative;
+}
+
+.right{
+    display: flex;
+    width: 75%;
+    flex-direction: row;
+    justify-content: center;
+}
+tr:nth-of-type(2n){
+    background-color: #f4f4fb;
+}
+tr:hover>.selected{
+    background-color: #4547B5;
+   transition: 0.1s all ease;
+}
+tr:hover>td{
+    transition: 0.1s all ease;
+}
+
+.forSelect{
+    width: 5px;
+    min-width: 0;
+}
+.selected{
+    width: 5px;
+    transition: 0.1s all ease;
+    border-radius: 0 5px 5px 0;
+}
+
+.photo{
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+}
+.colorparent{
+    position: relative;
+}
+.colorparent>div{
+    margin-left: 50%;
+    transform: translateX(-50%);
+    background-size:cover;
+    background-position: center center;
+}
+.colors{
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+}
+.uploadbtn>a{
+    text-decoration: none;
+    color: #57a6c5;
+}
+.uploadbtn{
+    padding: 5px;
+    border: 2px solid #57a6c5;
+    background-color: white;
+    margin: 5px;
+    border-radius: 5px;
+    transition: 0.1s all ease;
+    margin-top: 15px;
+}
+
+.gallerybtn>a{
+    text-decoration: none;
+    color: #4547B5;
+}
+
+.gallerybtn{
+    padding: 5px;
+    border: 2px solid #4547B5;
+    background-color: white;
+    margin: 5px;
+    border-radius: 5px;
+    transition: 0.1s all ease;
+    margin-top: 15px;
+}
+.downloadbtn>a{
+    text-decoration: none;
+    color: #70e000;
+   
+
+}
+.downloadbtn, .invoicelink{
+    padding: 5px;
+    border: 2px solid #70e000;
+    background-color: white;
+    margin: 5px;
+    border-radius: 5px;
+    transition: 0.1s all ease;
+    margin-top: 15px;
+}
+#allcarinvoices, #byyearinvoices, #bypriceinvoices{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.downloadbtn:hover, .gallerybtn:hover, .uploadbtn:hover, .invoicelink:hover{
+    transform: translateY(-3px);
+    transition: 0.1s all ease;
+}            
+.invoicelink>a{
+    text-decoration: none;
+    color: #70e000
+}   
+      
+select{
+    margin-top: 20px;
+    padding: 5px;
+    width: 100px;
+}
+option{
+    padding: 3px;
+}
+
+input[type=number]{
+    font-size: 14px;
+    border-radius: 6px;
+    line-height: 1.5;
+    padding: 5px 10px;
+    transition: box-shadow 100ms ease-in, border 100ms ease-in, background-color 100ms ease-in;
+    border: 2px solid #dee1e2;
+    color: rgb(14, 14, 16);
+    background: #dee1e2;
+    display: block;
+    height: 36px;
+}
+input[type=number]:hover {
+    border-color: #ccc;
+}
+input[type=number]:focus{
+    border-color: #4547B5;
+    background: #fff;
+}
+label{
+    text-align: center;
+    width: 100%;
+}
+.m-10{
+    position: relative;
+    margin: 10px;
+}
+#upload{
+    width: 800px;
+    min-height: 300px;
+    border: 2px dashed rgb(169, 170, 240);
+    border-radius: 10px;
+    margin-top: 30px;
+    padding: 10px;
+    background-color: white;
+    transition: 0.2s all ease;
+}
+#upload:hover{
+    width: 840px;
+    min-height: 350px;
+    transition: 0.2s all ease;
+}
+#upload>h3{
+    color: rgb(161, 161, 161);
+    margin-bottom: 30px;
+}
+
+.uploadphotodiv{
+    /* width: 205px; */
+    height: 205px;
+    position: relative;
+    border-radius: 10px;
+    margin: 3px;
+}
+.removebutton{
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    background-color: #4547B5;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s all ease;
+}
+.removebutton:hover{
+    transform: translateY(-3px);
+    transition: 0.2s all ease;
+
+}
+.uploadphotodiv>img{
+    /* width: 200px; */
+    height: 200px;
+    margin: 0;
+    border-radius: 10px;
+}
+
+#photos{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.canvas{
+    margin-top: 50px;
+    position: relative;
+    background-position: center;
+    background-size: contain;
+}
+.selectedRect{
+    position: absolute;
+    background-color: rgba(86, 174, 221, 0.541);
+    border: 4px white dashed;
+}

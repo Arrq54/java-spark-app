@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cars</title>
+</head>
+<style>@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');</style>
+<style>
+    body{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+    .main{
+        display: flex;
+        flex-direction: column;
+        width: 750px;
+        justify-content: center;
+        align-items: center;
+    }
+    .line{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin: 10px;
+    }
+    .center{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+</style>
+<body>
+    <h3 style="text-align: center">Spark server, post, fetch</h3>
+
+    <div class="main">
+        <div class="line">
+            <label for="model">Model</label>
+            <input type="text" name="model" value="car model" id="model">
+        </div>
+        <div class="line">
+            <label for="year">Rok</label>
+            <select name="year" id="year">
+                <option value="2000">2000</option>
+                <option value="2001">2001</option>
+                <option value="2002">2002</option>
+                <option value="2003">2003</option>
+                <option value="2004">2004</option>
+            </select>
+        </div>
+        <div class="line">
+            <span>poduszki powietrzne: kierowca | pasażer | tylna kanapa | boczne z tyłu</span>
+            <div>
+                <input type="checkbox" name="driver" id="cb1">
+                <input type="checkbox" name="passenger" id="cb2">
+                <input type="checkbox" name="backseats" id="cb3">
+                <input type="checkbox" name="sides" id="cb4">
+            </div>
+        </div>
+        <div class="line">
+            <label for="color">Kolor</label>
+            <input type="color" name="color" id="color">
+        </div>
+        <div class="center">
+            <button class="btAdd" onclick="addCar()">Dodaj</button>
+        </div>
+        <div class="center">
+            <a href="/Cars.html">Strona z danymi</a>
+        </div>
+        <div class="center">
+            <a href="/Admin.html">Admin</a>
+        </div>
+    </div>
+</body>
+
+<script>
+    async function addCar() {
+        let json = await fetchAddAsync()
+        console.log(json)
+        alert(JSON.stringify(json,null,5))
+    }
+    fetchAddAsync = async () => {
+
+        const data = JSON.stringify({
+            model: document.getElementById("model").value,
+            year: document.getElementById("year").value,
+            color: document.getElementById("color").value,
+            airbags: [
+                {
+                    description: "kierowca",
+                    value: document.getElementById("cb1").checked,
+                },
+                {
+                    description: "pasazer",
+                    value: document.getElementById("cb2").checked,
+                },
+                {
+                    description: "kanapa",
+                    value: document.getElementById("cb3").checked,
+                },
+                {
+                    description: "boczne",
+                    value: document.getElementById("cb4").checked,
+                }
+            ]
+        })
+
+        const options = {
+            method: "POST",
+            body: data,
+        };
+
+        let response = await fetch("/add", options)
+
+        if (!response.ok)
+            return response.status
+        else
+            return await response.json() // response.json
+
+    }
+</script>
+</html>

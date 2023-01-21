@@ -1,0 +1,92 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+tr{
+    color: black;
+    text-align: center;
+}
+th{
+    text-align: center;
+    color: blue;
+    padding: 5px;
+    border: none;
+    min-width: 120px;
+    color: #999cb2;
+   
+}
+thead{
+    background-color: #f4f4fb;
+}
+
+.mainbody{
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4fb;
+}
+td{
+    padding: 15px;
+}
+.btn{
+    border: 1px solid #a1615d;
+    color:  #a1615d;
+    background: none;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 5px;
+}
+th{
+    background-color: #f4f4fb;
+}
+tr:nth-child(2n+1){
+    background-color: #ffffff;
+}
+tr:nth-child(2n){
+    background-color: #f4f4fb;
+}
+
+.editform{
+    position: absolute;
+    background-color: rgba(50,50,50,0.5);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.innerflex{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 250px;
+}
+.menu{
+    display: flex;
+    justify-content: center;
+    border-bottom: 3px solid #3b3b3b;
+    margin-bottom: 30px;
+    padding: 30px;
+}
+.menu>a{
+    margin: 10px 50px;
+}
+.main{
+    display: flex;
+    height: 100%;
+}
+.left{
+    height: 100%;
+    width: 20%;
+    border-right: 3px solid #3b3b3b;
+}
+.right{
+    height: 100%;
+    width: 80%;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
