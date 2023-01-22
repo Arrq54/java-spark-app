@@ -2,6 +2,7 @@ package controller;
 
 import model.Photo;
 
+import java.io.OutputStream;
 import java.util.HashMap;
 
 public interface PhotoService {
@@ -11,4 +12,7 @@ public interface PhotoService {
     Boolean deleteById(String id);
 
     HashMap<String, Photo> getAllPhotos();
+
+    Boolean rename(String id, String name);
+
 }

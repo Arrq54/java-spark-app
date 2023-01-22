@@ -2,16 +2,30 @@ package controller;
 
 import model.Photo;
 
-import java.io.File;
-import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletResponse;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class PhotoServiceImpl implements PhotoService {
     HashMap<String, Photo> photos = new HashMap<>();
+
+    @Override
+    public HashMap<String, Photo> getAllPhotos() {
+        photos = new HashMap<>();
+        File f = new File("images");
+        for(int i=0;i<f.listFiles().length;i++){
+                photos.put(String.valueOf(i),new Photo(String.valueOf(i), f.listFiles()[i].getName(), f.listFiles()[i].getPath()));
+
+        }
+        return photos;
+    }
 
     @Override
     public Photo getPhotoById(String id) {
@@ -57,13 +71,29 @@ public class PhotoServiceImpl implements PhotoService {
         return false;
     }
 
+
+
     @Override
-    public HashMap<String, Photo> getAllPhotos() {
-        photos = new HashMap<>();
-        File f = new File("images");
-        for(int i=0;i<f.listFiles().length;i++){
-            photos.put(String.valueOf(i),new Photo(String.valueOf(i), f.listFiles()[i].getName(), f.listFiles()[i].getPath()));
+    public Boolean rename(String id, String name) {
+        Boolean flag = false;
+        for (Map.Entry<String, Photo> entry : photos.entrySet()) {
+            if(entry.getValue().getId().equals(id)){
+
+
+                Path source = Paths.get("images/"+entry.getValue().getName());
+                try {
+                    Files.move(source, source.resolveSibling(name));
+                    flag=true;
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+
+
+            }
         }
-        return photos;
+        return flag;
     }
+
+
 }

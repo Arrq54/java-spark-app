@@ -6,7 +6,14 @@ import response.ResponseEntity;
 import response.ResponseStatus;
 import spark.Request;
 import spark.Response;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.Map;
 
 import static java.lang.Integer.parseInt;
 import static spark.Spark.*;
@@ -22,8 +29,10 @@ public class AppREST {
 
             delete("/api/photos/:id", (req, res) -> deleteUserById(req,res));
 
+            get("/api/photostream/:id", (req, res) ->getPhotoStream(req,res));
 
-            get("/api/photos/", (req, res) ->paramForGet(req,res));
+            put("/api/photos", (req, res) ->renamePhoto(req,res));
+//            get("/api/photos/", (req, res) ->paramForGet(req,res));
 //            get("/api/photos/:id", (req, res) ->getPhotoById(req,res));
 //
 //            get("/api/photos/:name", (req, res) ->getPhotoByName(req,res));
@@ -89,6 +98,39 @@ public class AppREST {
     }
 
 
+    static String getPhotoStream(Request req, Response res) throws IOException {
+        String id= req.params("id");
+        res.header("Content-Disposition", "attachment; filename=image.jpg");
+        for (Map.Entry<String, Photo> entry : photoService.getAllPhotos().entrySet()) {
+            if (entry.getValue().getId().equals(id)) {
+                File file = new File("images/"+entry.getValue().getName());
+                if(entry.getValue().getName().contains(".jpeg") || entry.getValue().getName().contains((".jpg"))){
+                    res.type("image/jpeg");
+                } else{
+                    res.type("image/png");
+                }
+                OutputStream outputStream = null;
+                outputStream = res.raw().getOutputStream();
+
+                outputStream.write(Files.readAllBytes(Path.of("images/"+entry.getValue().getName())));
+                outputStream.flush();
+                return "";
+
+
+
+            }
+        }
+            Gson gson = new Gson();
+            res.header("Access-Control-Allow-Origin", "*");
+            res.type("application/json");
+            return gson.toJson(new ResponseEntity(
+                    ResponseStatus.NOT_FOUND,
+                    "photo not found"
+            ));
+
+
+    }
+
     static String deleteUserById(Request req, Response res) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         res.header("Access-Control-Allow-Origin", "*");
@@ -123,6 +165,23 @@ public class AppREST {
                     ResponseStatus.SUCCESS,
                     "photo found",
                     gson.toJsonTree(photo)
+            ));
+        }
+    }
+
+    static String renamePhoto(Request req, Response res) {
+        Gson gson = new Gson();
+        String newName = gson.fromJson(req.body(), Name.class).getName();
+        String id = gson.fromJson(req.body(), Name.class).getId();
+        if(photoService.rename(id,newName)){
+            return gson.toJson(new ResponseEntity(
+                    ResponseStatus.SUCCESS,
+                    "photo renamed"
+            ));
+        }else{
+            return gson.toJson(new ResponseEntity(
+                    ResponseStatus.ERROR,
+                    "photo file rename error"
             ));
         }
     }
