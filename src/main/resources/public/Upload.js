@@ -43,8 +43,9 @@ document.querySelector("#upload").ondrop = function (e) {
 
 }
 
-let saveFiles = ()=>{
-    fetch("/savecurrentfiles", { method: "post", body:{} })
+let saveFiles =async  ()=>{
+    await fetch("/savecurrentfiles", { method: "post", body:{} })
+    alert("ZAPISANO!")
 }
 function generatePhotos(arr){
     document.getElementById("photos").innerHTML = ""

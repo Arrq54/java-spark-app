@@ -5,55 +5,10 @@
     <title>Cars</title>
 </head>
 <style>@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');</style>
-<style>
-    *{
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-    }
-    .table{
-        border: 1px solid blue;
-    }
-    tr{
-        border: 1px solid blue;
-        color: blue;
-        text-align: center;
-        border: 1px solid blue;
-    }
-    th{
-        text-align: center;
-        color: blue;
-        border: 1px solid blue;
-        padding: 5px;
-        min-width: 120px;
-    }
-    td{
-        border: 1px solid blue;
-    }
-    .btn{
-        border: 1px solid red;
-        color: red;
-        border-radius: 5px;
-    }
+<link rel="stylesheet" href="Cars.css">
 
-    .editform{
-        position: absolute;
-        background-color: rgba(50,50,50,0.5);
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-    }
-    .innerflex{
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        width: 250px;
-    }
-</style>
 <body>
+    <div class="overlay" style="display: none" id="overlay"></div>
     <div class="editform" style="display: none" id="edtf">
         <div class="innerflex">
             <input type="text" name="updateName" id="updateName">
@@ -65,23 +20,37 @@
                 <option value="2004" class="opte">2004</option>
             </select>
             <div>
-                <button onclick="updateCar()">Update</button>
-                <button onclick="hideEdit()">Cancel</button>
+                <div class="btn btn-a">
+                    <div onclick="updateCar()">Update</div>
+                </div>
+                <div class="btn btn-a">
+                    <div onclick="hideEdit()">Cancel</div>
+                </div>
+
+
             </div>
         </div>
     </div>
 
 
 
+
     <h1>All cars</h1>
-    <a href="/">Strona index</a>
+
+    <div class="center">
+        <div class="btn btn-a">
+            <a href="/">Strona index</a>
+        </div>
+    </div>
+
 
     <table class="table">
         <thead>
+        <th class="forSelect"></th>
         <th>Id</th>
         <th>UUID</th>
         <th>Model</th>
-        <th>Year</th>>
+        <th>Year</th>
         <th>Airbags</th>
         <th>Color</th>
         <th></th>
@@ -92,142 +61,6 @@
         </tbody>
     </table>
 </body>
-<script>
-    let updateuuid = "";
-    async function getJSONData() {
-        let json = await fetchPostAsync()
-        console.log(json)
-        let tbody = document.getElementById("tbd")
-        tbody.innerHTML = "";
 
-        json.map(i=>{
-            let tr = document.createElement("TR");
-            let id  = document.createElement("TD");
-            id.innerText = i.id;
-
-            let uuid  = document.createElement("TD");
-            uuid.innerText = i.uuid;
-
-            let model  = document.createElement("TD");
-            model.innerText = i.model;
-
-            let year  = document.createElement("TD");
-            year.innerText = i.year;
-
-            let airbags  = document.createElement("TD");
-            let str = "";
-            i.airbags.map(airbag=>{
-                str += airbag.description + ":" + airbag.value + "\n"
-            })
-            airbags.innerText = str;
-
-            let color  = document.createElement("TD");
-            color.style.backgroundColor = i.color;
-
-
-
-            let deleteBt = document.createElement("button")
-            deleteBt.innerText = "Usuń"
-            deleteBt.classList.add("btn")
-            deleteBt.onclick = async () => {
-                console.log("AAA")
-                let x = await fetchDeleteAsync(i.uuid)
-                getJSONData();
-            }
-
-
-            let editBt = document.createElement("button")
-            editBt.innerText = "Edytuj"
-            editBt.classList.add("btn")
-            editBt.onclick = async () => {
-                document.getElementById("edtf").style.display = "flex";
-                updateuuid = i.uuid;
-
-
-                document.getElementById("updateName").value = i.model;
-
-                let tab = document.getElementsByClassName("opte");
-                for(let x=0;x<tab.length;x++){
-                    console.log(tab[x])
-                    console.log(i)
-                    if(i.year == tab[x].value){
-                        tab[x].selected = true;
-                    }
-                }
-
-
-            }
-
-
-            tr.appendChild(id)
-            tr.appendChild(uuid)
-            tr.appendChild(model)
-            tr.appendChild(year)
-            tr.appendChild(airbags)
-            tr.appendChild(color)
-            tr.appendChild(deleteBt)
-            let tdd = document.createElement("td")
-            tdd.appendChild(editBt)
-            tr.appendChild(tdd)
-            tbody.appendChild(tr)
-
-        })
-
-    }
-    hideEdit = () =>{
-        document.getElementById("edtf").style.display = "none";
-    }
-    updateCar = async () =>{
-        hideEdit();
-        let obj = {
-            uuid: updateuuid,
-            model: document.getElementById("updateName").value,
-            year: document.getElementById("updateYear").value
-        }
-        const data = JSON.stringify(obj)
-        const options = {
-            method: "POST",
-            body: data,
-        };
-
-        let response = await fetch("/update", options)
-
-        if (!response.ok)
-            return response.status
-        else
-            getJSONData()
-    }
-    fetchDeleteAsync = async (uuid) => {
-        const data = JSON.stringify({
-            uuid: uuid
-
-        })
-        const options = {
-            method: "POST",
-            body: data,
-        };
-
-        let response = await fetch("/delete", options)
-
-        if (!response.ok)
-            return response.status
-        else
-            return await response.json() // response.json
-    }
-    fetchPostAsync = async () => {
-
-        const options = {
-            method: "GET",
-        };
-
-        let response = await fetch("/json", options)
-
-        if (!response.ok)
-            return response.status
-        else
-            return await response.json() // response.json
-
-    }
-    getJSONData();
-</script>
+<script src="Cars.js"></script>
 </html>

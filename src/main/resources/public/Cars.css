@@ -1,0 +1,123 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    position: relative;
+}
+h1{
+    width: 100%;
+    background-color: #4547B5;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+tr{
+    height: 50px;
+}th{
+    color: gray;
+    min-width: 80px;
+    text-align: center;
+    border: none;
+    background-color: #f4f4fb;
+}
+table{
+    border-spacing: 0;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+.color{
+    width: 25px;
+    height: 25px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    border-radius: 5px;
+}
+td{
+    text-align: center;
+    transition: 0.1s all ease;
+    position: relative;
+}
+
+tr:nth-of-type(2n){
+    background-color: #f4f4fb;
+    z-index: 1;
+}
+tr:hover>.selected{
+    background-color: #4547B5;
+   transition: 0.1s all ease;
+}
+tr:hover>td{
+    transition: 0.1s all ease;
+}
+.forSelect{
+    width: 5px;
+    min-width: 0;
+}
+.selected{
+    width: 5px;
+    transition: 0.1s all ease;
+    border-radius: 0 5px 5px 0;
+}
+
+
+.btn{
+    background-color: #4547B5;
+    margin: 15px;
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
+    transition: 0.2s all ease;
+    cursor: pointer;
+}
+.btn:hover{
+    transform: translateY(-3px);
+    transition: 0.2s all ease;
+}
+.center{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.btn>a{
+    text-decoration: none;
+    color: white;
+}
+
+.overlay{
+    width: 100%;
+    /* height: 100vh; */
+    background-color: rgba(33, 33, 33, 0.703);
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    bottom: 0;
+    display: flex;
+
+}
+
+.editform{
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 11;
+}
+.innerflex{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 250px;
+    background-color: white;
+    padding: 50px;
+    border-radius: 5px;
+}
+select{
+    margin: 10px;
+}
+input[type="text"]{
+    margin: 10px;
+}

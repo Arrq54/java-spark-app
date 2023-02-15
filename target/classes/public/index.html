@@ -5,32 +5,7 @@
     <title>Cars</title>
 </head>
 <style>@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');</style>
-<style>
-    body{
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
-    }
-    .main{
-        display: flex;
-        flex-direction: column;
-        width: 750px;
-        justify-content: center;
-        align-items: center;
-    }
-    .line{
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        margin: 10px;
-    }
-    .center{
-        width: 100%;
-        display: flex;
-        justify-content: center;
-    }
-</style>
+<link rel="stylesheet" href="Index.css"/>
 <body>
     <h3 style="text-align: center">Spark server, post, fetch</h3>
 
@@ -63,14 +38,19 @@
             <input type="color" name="color" id="color">
         </div>
         <div class="center">
-            <button class="btAdd" onclick="addCar()">Dodaj</button>
+            <div class="btn btn-a">
+                <div class="btAdd" onclick="addCar()">Dodaj</div>
+            </div>
         </div>
         <div class="center">
-            <a href="/Cars.html">Strona z danymi</a>
+            <div class="btn btn-a">
+                <a href="/Cars.html">Strona z danymi</a>
+            </div>
+            <div class="btn btn-a">
+                <a href="/Admin.html">Admin</a>
+            </div>
         </div>
-        <div class="center">
-            <a href="/Admin.html">Admin</a>
-        </div>
+
     </div>
 </body>
 

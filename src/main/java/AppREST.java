@@ -32,26 +32,6 @@ public class AppREST {
             get("/api/photostream/:id", (req, res) ->getPhotoStream(req,res));
 
             put("/api/photos", (req, res) ->renamePhoto(req,res));
-//            get("/api/photos/", (req, res) ->paramForGet(req,res));
-//            get("/api/photos/:id", (req, res) ->getPhotoById(req,res));
-//
-//            get("/api/photos/:name", (req, res) ->getPhotoByName(req,res));
-
-//
-//            //user z danym id
-//            get("/api/users/:id", (req, res) -> getUserById(req,res));
-//
-//            //dodaj usera
-//            post("/api/users", (req, res) ->  add(req,res));
-//
-//
-//            //edycja usera z danym id
-//            put("/api/users", (req, res) ->  editUser(req,res));
-//
-//            //sprawdz czy istnieje
-//            options("/api/users/:id", (req, res) -> userExists(req,res));
-//
-//            //usuwanie
         }
     private static PhotoServiceImpl photoService = new PhotoServiceImpl();
 
@@ -111,13 +91,9 @@ public class AppREST {
                 }
                 OutputStream outputStream = null;
                 outputStream = res.raw().getOutputStream();
-
                 outputStream.write(Files.readAllBytes(Path.of("images/"+entry.getValue().getName())));
                 outputStream.flush();
                 return "";
-
-
-
             }
         }
             Gson gson = new Gson();
